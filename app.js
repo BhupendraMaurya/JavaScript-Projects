@@ -5,13 +5,15 @@ let resetBtn = document.querySelector("#reset_button");
 let newGameButton = document.querySelector("#new_btn");
 
 let msgContainer = document.querySelector(".msg-container");
+let drawContainer = document.querySelector(".draw_container");
 
 let msg = document.querySelector("#msg");
+
 
 let turnO = true//player X, playerO
 
 // putting the condition for DRAW
-const count = 0;
+let count = 0;
 
 const winPatterns = [
     [0,1,2],
@@ -43,6 +45,8 @@ boxes.forEach((box) =>{
     })
 })
 
+let drawVariable = true;
+
 const checkWinner = () =>{
     for(let pattern of winPatterns){
 
@@ -55,8 +59,14 @@ const checkWinner = () =>{
                 console.log("Winner", pos1Val);
 
                 showWinner(pos1Val);
+                drawVariable = false;
             }
         }
+    }
+
+    // If no winner and all boxes are filled, declare draw
+    if (count === 9 && drawVariable === true) {
+        checkDraw();
     }
 }
 
@@ -65,6 +75,14 @@ const showWinner = (winner) =>{
     msgContainer.classList.remove("hide");
     disableBoxes();
 }
+
+
+const checkDraw = () => {
+    document.querySelector(".draw-container").classList.remove("hide2");
+    document.getElementById("draw").innerText = "It's a Draw!";
+    disableBoxes();
+};
+
 
 const disableBoxes = () =>{
     for(let box of boxes){
@@ -83,9 +101,15 @@ const resetGame = () =>{
     turnO = true;
     enableBoxes();
     msgContainer.classList.add("hide");
+
+    
 }
+
+
+
 
 
 
 newGameButton.addEventListener("click", resetGame);
 resetBtn.addEventListener("click", resetGame);
+

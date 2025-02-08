@@ -80,3 +80,21 @@ body{
 .hide{
     display: none;
 }
+
+.draw-container{
+    height:100vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+#draw{
+    color: white;
+    height: 8vmin;
+}
+
+.hide2{
+    display: none;
+}
